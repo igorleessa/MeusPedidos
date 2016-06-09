@@ -8,6 +8,8 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
 
 namespace MPWebService.Skafe
 {
@@ -17,6 +19,7 @@ namespace MPWebService.Skafe
         {
             var RsPreco = new Recordset();
             var Retorno = new PostPrecoBO();
+            
 
             try
             {
@@ -50,6 +53,8 @@ namespace MPWebService.Skafe
 
                     var response = (HttpWebResponse)request.GetResponse();
                     var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+                    var RespostaPost = responseString;
 
                 }
                 catch (Exception)
@@ -88,6 +93,15 @@ namespace MPWebService.Skafe
                 throw;
             }
             return new PostPrecoBO[0];
+        }
+
+
+        public static PostClienteBO InsertIDPreco()
+        {
+            var RsPreco = new Recordset();
+            var Retorno = new PostClienteBO();
+
+            return Retorno;
         }
 
     }

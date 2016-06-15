@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace MPWebService.Skafe
 {
@@ -20,8 +21,22 @@ namespace MPWebService.Skafe
         public string cidade { get; set; }
         public string estado { get; set; }
         public string observacao { get; set; }
-        public string email { get; set; }
-        public string telefone { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public List<Email> emails { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public List<Telefones> telefones { get; set; }
         public bool excluido { get; set; }
+    }
+
+    public class Email
+    {
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string email { get; set; }
+    }
+
+    public class Telefones
+    {
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string numero { get; set; }
     }
 }

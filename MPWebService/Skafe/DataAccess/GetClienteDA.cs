@@ -13,7 +13,7 @@ namespace MPWebService.Skafe
         public static GetClienteBO[] ExcluirCliente(GetClienteBO[] Json)
         {
             var Retorno = new GetClienteBO();
-
+            
             for (int i = 0; i < Json.Length; i++)
             {
                 Retorno.id = Json[i].id;
@@ -21,14 +21,14 @@ namespace MPWebService.Skafe
                 Retorno.nome_fantasia = "DESABILITADO";
                 Retorno.tipo = "J";
                 Retorno.Inscricao_estadual = "";
-                Retorno.cnpj = "12345678901212";
+                Retorno.cnpj = "02743313000165";
                 Retorno.bairro = "DESABILITADO";
                 Retorno.suframa = "";
                 Retorno.rua = "DESABILITADO";
                 Retorno.cep = "26012480";
                 Retorno.estado = "RJ";
                 Retorno.cidade = "DESABILITADO";
-                Retorno.excluido = true;
+                Retorno.excluido = false;
 
                 var JsonString = new JavaScriptSerializer().Serialize(Retorno);
 

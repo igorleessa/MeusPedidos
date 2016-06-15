@@ -13,6 +13,7 @@ using RestSharp;
 using System.Text.RegularExpressions;
 using MPWebService.CORE;
 using MPWebService.Skafe;
+using System.Web.Script.Serialization;
 
 namespace MPWebService
 {
@@ -55,7 +56,7 @@ namespace MPWebService
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void GetPreco(string JsonChamada)
+        public void ExcluirPreco(string JsonChamada)
         {
             var SQL = new LibOrgm.SQL();
             var cn = new ADODB.Connection();
@@ -119,7 +120,7 @@ namespace MPWebService
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void GetCliente(string JsonChamada)
+        public void ExcluirCliente(string JsonChamada)
         {
             var SQL = new LibOrgm.SQL();
             var cn = new ADODB.Connection();
@@ -148,53 +149,6 @@ namespace MPWebService
             catch (Exception)
             {
                 throw;
-            }
-        }
-
-
-
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void TestePostPreco(string JsonChamada)
-        {
-            SerializerFO Serializer = new SerializerFO();
-            var Retorno = new PostPrecoBO();
-
-            Retorno.nome = "DESABILITADO";
-            Retorno.tipo = "A";
-            Retorno.acrescimo = 0;
-            Retorno.desconto = null;
-            Retorno.excluido = true;
-            try
-            {
-
-                Context.Response.Clear();
-                Context.Response.ContentType = "application/json";
-
-
-                var request = (HttpWebRequest)WebRequest.Create("http://sandbox.meuspedidos.com.br:8080/api/v1/tabelas_preco/");
-
-                var data = Encoding.UTF8.GetBytes(Serializer.Serializador(Retorno));
-                request.Headers.Add("ApplicationToken", "91bea5cc-212a-11e6-8779-0a52011679b3");
-                request.Headers.Add("CompanyToken", "6e65c8c6-212a-11e6-8779-0a52011679b3");
-                request.Method = "POST";
-                request.ContentType = "application/json";
-                request.ContentLength = data.Length;
-
-                using (var stream = request.GetRequestStream())
-                {
-                    stream.Write(data, 0, data.Length);
-                }
-
-                var response = (HttpWebResponse)request.GetResponse();
-                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
-                Context.Response.Write(response.Headers);
-
-            }
-            catch (Exception Ex)
-            {
-                Context.Response.Write(Ex.Message);
             }
         }
 
